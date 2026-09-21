@@ -128,25 +128,47 @@ export default function FieldRangeSlider({
           min={min}
           max={max}
           sx={{
-              color: "#000",
-              width: "calc(100% - 16px)",
-              marginLeft: "8px", 
-              "& .MuiSlider-thumb": {
-                  width: 16,
-                  height: 16,
-                  backgroundColor: "#fff", 
-                  border: "2px solid #000", 
-                  boxShadow: "none", 
-              },
-              "&:hover": {
-                boxShadow: "none",
-              },
+            color: "#000",
+            width: "calc(100% - 16px)",
+            marginLeft: "8px",
 
-              "& .MuiSlider-rail": {
-                  left: "-8px",
-                  width: "calc(100% + 16px)",
-              },
-            }}
+            "& .MuiSlider-thumb": {
+                width: 16,
+                height: 16,
+                backgroundColor: "#fff",
+                border: "2px solid #000",
+                boxShadow: "none",
+
+                "&:hover": {
+                    boxShadow: "none",
+                },
+
+                "&:focus": {
+                    boxShadow: "none",
+                },
+
+                "&.Mui-focusVisible": {
+                    boxShadow: "none",
+                },
+
+                "&.Mui-active": {
+                    boxShadow: "none",
+                },
+
+                "&::before": {
+                    display: "none",
+                },
+
+                "&::after": {
+                    display: "none",
+                },
+            },
+
+            "& .MuiSlider-rail": {
+                left: "-8px",
+                width: "calc(100% + 16px)",
+            },
+        }}
         />
 
         {
