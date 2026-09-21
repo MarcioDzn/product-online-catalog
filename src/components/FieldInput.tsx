@@ -39,8 +39,19 @@ export default function FieldInput({
                     placeholder={placeholder} 
                     mode={mode}
                     onChange={onChange}
-                    className="rounded-lg px-2 py-2 border border-gray-300 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-                />
+                        className={`
+                            rounded-lg
+                            px-2 py-2
+                            border
+                            outline-none
+                            transition-all duration-200
+                            ${
+                                error
+                                    ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                    : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                            }
+                        `}
+                    />
             </div>
 
 
