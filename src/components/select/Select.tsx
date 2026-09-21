@@ -10,7 +10,7 @@ type Props = {
     value: string;
     options: Option[]
     onChange: (e: ChangeEvent<HTMLSelectElement>, value: string) => void;
-    className: string
+    className?: string
 };
 
 export default function Select({ value, options, onChange, className }: Props) {
