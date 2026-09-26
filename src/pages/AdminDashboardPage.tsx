@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteProduct, getProducts } from "../services/products";
+import { deleteProduct, getMyProducts, getProducts } from "../services/products";
 import ProductCardAdminList from "../components/ProductCardAdminList";
 import Button from "../components/Button";
 import { useEffect, useState, type ChangeEvent } from "react";
@@ -123,7 +123,7 @@ export default function AdminDashboardPage() {
     } = useQuery({
         queryKey: ["products", search, page, categoryIds, price, stock, currentSortFilter],
         queryFn: () => 
-            getProducts(
+            getMyProducts(
                 search, 
                 categoryIds.map(categoryId => Number(categoryId)), 
                 price,

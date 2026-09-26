@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 type Props = {
@@ -7,6 +8,8 @@ type Props = {
 
 export default function Navbar({ children }: Props) {
     const { user, isAuthenticated, logout } = useAuth();
+
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
     return (
         <>
@@ -25,21 +28,99 @@ export default function Navbar({ children }: Props) {
 
                     <div className="flex justify-between items-center">
                         {isAuthenticated && user ? (
-                            <div
-                                className="flex justify-center items-center rounded-lg bg-lime-400 w-8 h-8 cursor-pointer"
-                                onClick={logout}
-                            >
-                                <span>
+                            <div className="relative">
+                                {/* Avatar */}
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setIsUserMenuOpen((prev) => !prev)
+                                    }
+                                    className="flex justify-center items-center rounded-lg bg-lime-400 w-9 h-9 cursor-pointer font-medium hover:bg-lime-500 transition-colors"
+                                >
                                     {user.name[0].toUpperCase()}
-                                </span>
+                                </button>
+
+                                {/* Menu */}
+                                {isUserMenuOpen && (
+                                    <>
+                                        {/* Área invisível para clicar fora */}
+                                        <div
+                                            className="fixed inset-0 z-40"
+                                            onClick={() =>
+                                                setIsUserMenuOpen(false)
+                                            }
+                                        />
+
+                                        <div className="absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
+                                            
+                                            {/* Informações do usuário */}
+                                            <div className="border-b border-gray-100 px-4 py-3">
+                                                <p className="font-medium text-gray-900">
+                                                    {user.name}
+                                                </p>
+
+                                                <p className="mt-1 text-sm text-gray-500 truncate">
+                                                    {user.email}
+                                                </p>
+                                            </div>
+
+                                            {/* Opções */}
+                                            <div className="p-2">
+                                                <Link
+                                                    to="/admin"
+                                                    onClick={() =>
+                                                        setIsUserMenuOpen(false)
+                                                    }
+                                                    className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                >
+                                                    Minha conta
+                                                </Link>
+
+                                                <Link
+                                                    to="/admin/settings"
+                                                    onClick={() =>
+                                                        setIsUserMenuOpen(false)
+                                                    }
+                                                    className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                >
+                                                    Configurações
+                                                </Link>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setIsUserMenuOpen(false);
+                                                        logout();
+                                                    }}
+                                                    className="w-full rounded-lg px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+                                                >
+                                                    Sair
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         ) : (
-                            <a
-                                href="/admin"
-                                className="text-sm font-medium"
-                            >
-                                Entrar
-                            </a>
+                            <div className="text-center text-sm text-gray-600">
+                                <Link
+                                    to="/admin"
+                                    className="font-medium text-black hover:underline"
+                                >
+                                    Entre
+                                </Link>
+
+                                <span className="mx-1 text-gray-400">
+                                    ou
+                                </span>
+
+                                <Link
+                                    to="/register"
+                                    className="font-medium text-black hover:underline"
+                                >
+                                    Cadastre-se
+                                </Link>
+                            </div>
                         )}
                     </div>
 
