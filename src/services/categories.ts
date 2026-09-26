@@ -69,3 +69,31 @@ export async function createCategory(
 
     return response.json();
 }
+
+export async function deleteCategory(id: number): Promise<void> {
+    const response = await fetch(
+        `http://localhost:8000/categories/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                ...getAuthHeaders(),
+            },
+        }
+    );
+
+    if (!response.ok) {
+        let message = `Erro ao excluir categoria: ${response.status}`;
+
+        try {
+            const error = await response.json();
+
+            if (error.detail) {
+                message = error.detail;
+            }
+        } catch {
+            // resposta sem JSON
+        }
+
+        throw new Error(message);
+    }
+}
