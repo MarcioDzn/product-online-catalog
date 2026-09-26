@@ -88,6 +88,16 @@ export default function Navbar({ children }: Props) {
                                                     Configurações
                                                 </Link>
 
+                                                <Link
+                                                    to="/admin/products"
+                                                    onClick={() =>
+                                                        setIsUserMenuOpen(false)
+                                                    }
+                                                    className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                >
+                                                    Gerenciar meus produtos
+                                                </Link>
+
                                                 <button
                                                     type="button"
                                                     onClick={() => {
