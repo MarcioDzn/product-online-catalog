@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Avatar from "../Avatar";
 
@@ -11,6 +11,8 @@ export default function Navbar({ children }: Props) {
     const { user, isAuthenticated, logout } = useAuth();
 
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+    const location = useLocation();
 
     return (
         <>
@@ -105,6 +107,7 @@ export default function Navbar({ children }: Props) {
                             <div className="text-center text-sm text-gray-600">
                                 <Link
                                     to="/admin"
+                                    state={{ from: location.pathname + location.search }}
                                     className="font-medium text-black hover:underline"
                                 >
                                     Entre

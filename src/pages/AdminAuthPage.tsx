@@ -6,7 +6,7 @@ import type { AuthData } from "../types/Auth";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "../services/auth";
 import Button from "../components/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 
@@ -20,7 +20,8 @@ export default function AdminAuthPage() {
     const { refreshUser } = useAuth();
 
     const navigate = useNavigate();
-
+    const location = useLocation();
+    
     const authMutation = useMutation({
         mutationFn: (data: AuthData) => auth(data),
 
@@ -32,6 +33,9 @@ export default function AdminAuthPage() {
 
             setAuthError("");
             navigate("/admin/products")
+
+            const from = location.state?.from;
+            navigate(from || "/products", { replace: true });
         },
 
         onError: (error) => {
