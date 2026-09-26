@@ -26,7 +26,6 @@ export default function ProductCardAdminList({
     onDeleteClick, 
     onUpdateClick 
 }: Props) {
-    const [sort, setSort] = useState(1);
     const [search, setSearch] = useState("")
 
     const navigate = useNavigate();
@@ -66,19 +65,6 @@ export default function ProductCardAdminList({
         });
     }
 
-    function toggleProduct(id: number) {
-        setSelectedProducts((current) => {
-            const next = new Set(current);
-
-            if (next.has(id)) {
-                next.delete(id);
-            } else {
-                next.add(id);
-            }
-
-            return next;
-        });
-    }
 
     const visiblePageProducts = products.slice(0, maxProductsPerPage);
 
@@ -93,22 +79,7 @@ export default function ProductCardAdminList({
         <div className="w-full">
             <div className="rounded-2xl border border-gray-200 bg-white">
                 {/* Toolbar */}
-                <div className="flex flex-col-reverse gap-4 min-[480px]:flex-row min-[480px]:items-center justify-between border-b border-gray-100 px-4 py-3">
-                    <div className="flex items-center gap-3 py-2">
-
-                        <SelectButton
-                            checked={allSelected}
-                            indeterminate={someSelected && !allSelected}
-                            onChange={toggleAllProducts}
-                        />
-
-                        <span className="text-sm font-medium text-gray-500">
-                            {selectedProducts.size > 0
-                                ? `${selectedProducts.size} selecionados`
-                                : "Selecionar todos"}
-                        </span>
-                    </div>
-
+                <div className="flex flex-col-reverse gap-4 min-[480px]:flex-row min-[480px]:items-center justify-end border-b border-gray-100 px-4 py-3">
                     <div className="flex flex-row gap-2">
                         <SearchInput 
                             value={search} 
@@ -137,8 +108,6 @@ export default function ProductCardAdminList({
                                 stock={product.stock}
                                 category={product.category.name}
                                 image={product.images.find((image) => image.is_cover)}
-                                selectedProducts={selectedProducts}
-                                toggleProduct={toggleProduct}
                                 onDeleteClick={onDeleteClick}
                                 onUpdateClick={onUpdateClick}
                             />
