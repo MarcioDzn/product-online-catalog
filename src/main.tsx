@@ -18,6 +18,7 @@ import ProductPage from './pages/ProductPage.tsx';
 import AdminAuthPage from './pages/AdminAuthPage.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
+import AdminRegisterPage from './pages/AdminRegisterPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -67,6 +68,11 @@ createRoot(document.getElementById('root')!).render(
                 <Route
                   path="/admin"
                   element={<AdminAuthPage />}
+                />
+
+                <Route
+                  path="/register"
+                  element={<AdminRegisterPage />}
                 />
               </Route>
             </Routes>

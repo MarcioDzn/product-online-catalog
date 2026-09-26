@@ -34,21 +34,21 @@ export default function ProductCard({
                     <img 
                         src={image.url} 
                         alt="Imagem do Produto" 
-                        className="h-full w-auto max-w-none"
+                        className="h-full w-auto max-w-none transition-transform duration-300 group-hover:scale-105"
                     />
                 }
 
-                <div className="absolute inset-0 bg-white/30 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" />
             </div>
             
             <div className="group flex flex-col cursor-pointer">
-                <h1 className="relative w-fit font-semibold text-lg leading-tight">
+                <h1 className="relative w-fit font-semibold text-md leading-tight">
                     {title}
 
-                    <span className="absolute left-0 -bottom-1 h-[1px] w-full origin-left scale-x-0 bg-black transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    <span className="absolute left-0 -bottom-0.5 h-0.5 w-full origin-left scale-x-0 bg-black transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </h1>
-                <span className="font-light text-sm text-gray-500 leading-relaxed line-clamp-2 group-hover:text-gray-500">{description}</span>
-                <span className="mt-2 font-bold text-xl">{formatCurrency(price)}</span>
+                <span className="text-md">
+                    {formatCurrency(price)}
+                </span>
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../services/products";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { formatCurrency } from "../utils/money";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
+import Divider from "../components/Divider";
 
 const MAX_THUMBNAIL = 5;
 const MAX_THUMBNAIL_MOBILE = 3;
@@ -12,8 +13,7 @@ export default function ProductPage() {
     const { id } = useParams<{ id: string }>();
     const [imageIndex, setImageIndex] = useState(0);
     const [thumbnailStart, setThumbnailStart] = useState(0);
-    const [productCounter, setProductCounter] = useState(1);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
 
     const {
         data: product,
@@ -25,7 +25,7 @@ export default function ProductPage() {
     });
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(max-width: 639px)");
+        const mediaQuery = window.matchMedia("(max-width: 1000px)");
 
         const handleChange = () => {
             setIsMobile(mediaQuery.matches);
@@ -83,7 +83,7 @@ export default function ProductPage() {
                                         <div
                                             key={img.id}
                                             onClick={() => setImageIndex(index)}
-                                            className={`relative w-16 md:w-20 aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer shrink-0
+                                            className={`relative w-20 md:w-24 aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer shrink-0
                                                 ${
                                                     index === imageIndex
                                                         ? "border-2 border-black"
@@ -132,67 +132,64 @@ export default function ProductPage() {
                 </div>
 
                 <div className="md:col-span-5 flex flex-col gap-6 w-full min-w-0">
+                    <div>
+                        <span>
+                            <Link
+                                to={`/products`}
+                                className="hover:underline"
+                            >
+                                Produtos
+                            </Link>
+                        </span>
+                        <span>
+                            {" > "}
+                        </span>
+                        <span>
+                            <Link
+                                to={`/products?category_id=${product.category.id}`}
+                                className="hover:underline"
+                            >
+                                {product.category.name}
+                            </Link>
+                        </span>
+                    </div>
                     <div className="flex flex-col gap-2">
                         <h1 className="text-2xl lg:text-3xl font-bold">{product.title}</h1>
                         <span className="text-xl lg:text-2xl font-bold text-gray-900">
                             {formatCurrency(product.price)}
                         </span>
                     </div>
+                    
+                    {
+                        product.description && (
+                            <>
+                                <Divider />
+
+                                <div>
+                                    <div className="w-full prose prose-sm max-w-none">
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: product.description }}
+                                        />
+                                    </div>
+                                </div>
+                            </>
+
+                        )
+                    }
+                    
+                    <Divider />
 
                     <div className="flex flex-col gap-3">
-                        <div className="flex flex-col sm:flex-row gap-3">
-                            <div className="flex border-2 justify-between items-center border-black rounded-sm w-full sm:w-32 shrink-0">
-                                <button
-                                    type="button"
-                                    className="p-2 cursor-pointer hover:bg-gray-100"
-                                    onClick={() => {
-                                        if (productCounter > 1) {
-                                            setProductCounter(productCounter - 1);
-                                        }
-                                    }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                                    </svg>
-                                </button>
-                                
-                                <span className="font-semibold px-2">{productCounter}</span>
-
-                                <button
-                                    type="button"
-                                    className="p-2 cursor-pointer hover:bg-gray-100"
-                                    onClick={() => {
-                                        if (productCounter < product.stock) {
-                                            setProductCounter(productCounter + 1);
-                                        }
-                                    }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <Button
-                                onClick={() => {}}
-                                className="w-full py-3 border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
-                            >
-                                Adicionar ao carrinho
-                            </Button>
-                        </div>
-
                         <Button
                             onClick={() => {}}
-                            className="w-full py-3 bg-black text-white hover:bg-gray-800 transition-colors"
+                            className="flex items-center justify-center gap-2 w-full py-3 border-2 border-green-500 bg-white text-green-500 hover:text-white hover:bg-green-500 transition-colors"
                         >
-                            Comprar Agora
-                        </Button>
-                    </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
+                                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                            </svg>
 
-                    <div className="w-full prose prose-sm max-w-none border-t pt-4">
-                        <div
-                            dangerouslySetInnerHTML={{ __html: product.description }}
-                        />
+                            Chamar no WhatsApp
+                        </Button>
                     </div>
                 </div>
             </div>

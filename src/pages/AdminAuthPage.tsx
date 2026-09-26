@@ -6,7 +6,7 @@ import type { AuthData } from "../types/Auth";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "../services/auth";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 
@@ -127,6 +127,15 @@ export default function AdminAuthPage() {
                             Entrar
                         </Button>
 
+                        <div className="text-center text-sm text-gray-600 mt-2">
+                            Não possui uma conta?{" "}
+                            <Link
+                                to="/register"
+                                className="font-medium text-blue-600 transition-colors hover:text-blue-700 hover:underline"
+                            >
+                                Registre-se
+                            </Link>
+                        </div>
                     </div>
                 </form>
             </div>
