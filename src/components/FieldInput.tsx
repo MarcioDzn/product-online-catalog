@@ -6,7 +6,7 @@ type Props = {
     value: string,
     placeholder: string,
     error: string
-    mode?: "integer" | "float" | "currency"
+    mode?: "integer" | "float" | "currency" | "phone"
     type?: "text" | "password"
     onChange: (value: string) => void
 }

@@ -16,6 +16,7 @@ import { register } from "../services/register";
 export default function AdminRegisterPage() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
@@ -70,6 +71,7 @@ export default function AdminRegisterPage() {
             name,
             email,
             password,
+            phone,
             confirmPassword,
         });
 
@@ -83,13 +85,20 @@ export default function AdminRegisterPage() {
         const { 
             name: nameRegister, 
             email: emailRegister, 
-            password: passwordRegister 
+            password: passwordRegister,
+            phone: phoneRegister
         } = validation.data;
+
+        console.log(validation.data)
+
+        const phoneFormatted = `+${phoneRegister.replace(/\D/g, "")}`;
+        console.log(phoneFormatted)
 
         registerMutation.mutate({
             name: nameRegister,
             email: emailRegister,
             password: passwordRegister,
+            phone: phoneFormatted
         });
     }
 
@@ -164,6 +173,16 @@ export default function AdminRegisterPage() {
                             value={email}
                             onChange={setEmail}
                             error={fieldErrors.email}
+                        />
+
+                        <FieldInput 
+                            id="phone"
+                            label="Número do WhatsApp"
+                            placeholder="+55 (75) 99999-9999"
+                            value={phone}
+                            onChange={setPhone}
+                            error={fieldErrors.phone}
+                            mode="phone"
                         />
 
                         <FieldInput 

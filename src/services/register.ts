@@ -6,18 +6,22 @@ export async function register(data: RegisterData) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            password: data.password,
-        }),
+        body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-        const error = await response.json();
+    const responseData = await response.json();
 
-        throw new Error(error.detail ?? "Erro ao cadastrar novo usuário");
+    if (!response.ok) {
+        console.log("Erro da API:", responseData);
+
+        const message =
+            responseData.detail?.[0]?.msg ??
+            "Erro ao cadastrar usuário";
+
+        throw new Error(
+            message.replace(/^Value error,\s*/, "")
+        );
     }
 
-    return response.json();
+    return responseData;
 }

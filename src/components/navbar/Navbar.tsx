@@ -20,9 +20,14 @@ export default function Navbar({ children }: Props) {
                 <div className="w-full h-full flex flex-wrap md:flex-nowrap justify-between items-center gap-4 px-8">
 
                     <div>
-                        <span className="font-extrabold text-xl">
-                            CatalogWeb
-                        </span>
+                        <Link
+                            to="/products/"
+                        >
+                            <span className="font-extrabold text-xl">
+                                CatalogWeb
+                            </span>
+                        </Link>
+
                     </div>
 
                     <div className="order-last md:order-none w-full md:flex-1">
