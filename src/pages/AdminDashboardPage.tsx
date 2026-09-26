@@ -4,7 +4,7 @@ import { deleteProduct, getProducts } from "../services/products";
 import ProductCardAdminList from "../components/ProductCardAdminList";
 import Button from "../components/Button";
 import { useEffect, useState, type ChangeEvent } from "react";
-import { getCategories } from "../services/categories";
+import { getCategories, getMyCategories } from "../services/categories";
 import Accordion from "../components/accordion/Accordion";
 import FieldRangeSlider from "../components/slider/FieldRangeSlider";
 import { formatCurrency, maskCurrencyInput, parseCurrency } from "../utils/money";
@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
         isError: isErrorCategory,
     } = useQuery({
         queryKey: ["categories"],
-        queryFn: () => getCategories(),
+        queryFn: () => getMyCategories(),
     });
 
     useEffect(() => {

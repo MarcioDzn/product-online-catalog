@@ -5,8 +5,8 @@ import FieldImagePicker from "../components/imagePicker/FieldImagePicker";
 import FieldSelect from "../components/select/FieldSelect";
 import Button from "../components/Button";
 import type { ProductFormData, ProductImage, ProductImageFormData } from "../types/Products";
-import { getCategories } from "../services/categories";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { createCategory, getCategories, getMyCategories } from "../services/categories";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createProduct, getProductById, updateProduct } from "../services/products";
 import { productSchema } from "../schemas/productSchema";
 import type z from "zod";
@@ -14,10 +14,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PageActionContext } from "../context/PageActionContext";
 
 import toast from "react-hot-toast";
+import { categorySchema } from "../schemas/categorySchema";
 
 const MAX_IMAGES = 25
 
 export default function ProductFormPage() {
+    const queryClient = useQueryClient();
+
     const { setPageAction } = useContext(PageActionContext);
     
     const [productTitle, setProductTitle] = useState("")
@@ -29,6 +32,10 @@ export default function ProductFormPage() {
     const [images, setImages] = useState<ProductImage[]>([])
 
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+    const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+    const [categoryName, setCategoryName] = useState("");
+    const [categoryError, setCategoryError] = useState("");
 
     const navigate = useNavigate();
 
@@ -62,7 +69,7 @@ export default function ProductFormPage() {
         isError: isErrorCategory,
     } = useQuery({
         queryKey: ["categories"],
-        queryFn: () => getCategories(),
+        queryFn: () => getMyCategories(),
     });
 
     const {
@@ -85,6 +92,27 @@ export default function ProductFormPage() {
             console.error("Erro ao criar produto:", error)
         },
     })
+
+    const createCategoryMutation = useMutation({
+        mutationFn: createCategory,
+
+        onSuccess: async (newCategory) => {
+            toast.success("Categoria criada com sucesso!");
+
+            await queryClient.invalidateQueries({
+                queryKey: ["categories"],
+            });
+
+            setCategory(String(newCategory.id));
+            setCategoryName("");
+            setCategoryError("");
+            setIsCategoryModalOpen(false);
+        },
+
+        onError: (error) => {
+            setCategoryError(error.message);
+        },
+    });
 
     const updateProductMutation = useMutation({
         mutationFn: (data: ProductFormData) => updateProduct(Number(id), data),
@@ -209,6 +237,25 @@ export default function ProductFormPage() {
         }
     }
 
+    function handleCreateCategory(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const validation = categorySchema.safeParse({
+            name: categoryName,
+        });
+
+        if (!validation.success) {
+            const errors = getFieldErrors(validation.error);
+
+            setCategoryError(errors.name ?? "");
+            return;
+        }
+
+        setCategoryError("");
+
+        createCategoryMutation.mutate(validation.data);
+    }
+
     return (
         <main>
             <form id="product-form" onSubmit={handleCreateProduct}>
@@ -326,6 +373,19 @@ export default function ProductFormPage() {
                                         category: string
                                     ) => setCategory(category)}
                             />
+
+                            <Button
+                                type="button"
+                                className="mt-3 w-full"
+                                onClick={() => {
+                                    setCategoryError("");
+                                    setCategoryName("");
+                                    setIsCategoryModalOpen(true);
+                                }}
+                            >
+                                Criar categoria
+                            </Button>
+
                         </div>
 
                         <div className="border border-gray-200 rounded-lg p-4">
@@ -343,6 +403,57 @@ export default function ProductFormPage() {
                     </div>
                 </main>
             </form>
+
+            {isCategoryModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+                    <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+                        <div className="mb-6">
+                            <h2 className="text-xl font-semibold text-gray-900">
+                                Criar categoria
+                            </h2>
+
+                            <p className="mt-1 text-sm text-gray-500">
+                                Informe o nome da nova categoria.
+                            </p>
+                        </div>
+
+                        <form onSubmit={handleCreateCategory}>
+                            <FieldInput
+                                id="category-name"
+                                label="Nome da categoria"
+                                placeholder="Ex: Camisetas"
+                                value={categoryName}
+                                onChange={setCategoryName}
+                                error={categoryError}
+                            />
+
+                            <div className="mt-6 flex justify-end gap-3">
+                                <Button
+                                    type="button"
+                                    className="border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                                    onClick={() => {
+                                        setIsCategoryModalOpen(false);
+                                        setCategoryError("");
+                                    }}
+                                >
+                                    Cancelar
+                                </Button>
+
+                                <Button
+                                    type="submit"
+                                    disabled={createCategoryMutation.isPending}
+                                    onClick={() => {}}
+                                >
+                                    {createCategoryMutation.isPending
+                                        ? "Criando..."
+                                        : "Criar categoria"}
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
         </main>
     )
 }
