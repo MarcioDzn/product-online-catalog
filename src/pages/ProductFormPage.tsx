@@ -3,16 +3,16 @@ import FieldInput from "../components/FieldInput";
 import FieldImagePicker from "../components/imagePicker/FieldImagePicker";
 import FieldSelect from "../components/select/FieldSelect";
 import Button from "../components/Button";
-import type { ProductFormData, ProductImage, ProductImageFormData } from "../types/Products";
+import type { ProductFormData, ProductImage } from "../types/Products";
 import { getMyCategories } from "../services/categories";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createProduct, getProductById, updateProduct } from "../services/products";
 import { productSchema } from "../schemas/productSchema";
 import type z from "zod";
 import { useNavigate, useParams } from "react-router-dom";
 import { PageActionContext } from "../context/PageActionContext";
 
-import CreateCategoryModal from "../components/CreateCategoryModal";
+import CategoryManagerModal from "../components/CategoryManagerModal";
 
 import toast from "react-hot-toast";
 import TextAreaField from "../components/TextAreaField";
@@ -341,7 +341,7 @@ export default function ProductFormPage() {
                                     setIsCategoryModalOpen(true);
                                 }}
                             >
-                                Criar categoria
+                                Gerenciar categorias
                             </Button>
 
                         </div>
@@ -362,10 +362,10 @@ export default function ProductFormPage() {
                 </main>
             </form>
 
-            <CreateCategoryModal
+            <CategoryManagerModal
                 isOpen={isCategoryModalOpen}
                 onClose={() => setIsCategoryModalOpen(false)}
-                onSuccess={(newCategory) => {
+                onCategoryCreated={(newCategory) => {
                     setCategory(String(newCategory.id));
                 }}
             />
