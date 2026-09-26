@@ -21,7 +21,7 @@ export default function AdminAuthPage() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     const authMutation = useMutation({
         mutationFn: (data: AuthData) => auth(data),
 
@@ -137,7 +137,7 @@ export default function AdminAuthPage() {
                                 to="/register"
                                 className="font-medium text-blue-600 transition-colors hover:text-blue-700 hover:underline"
                             >
-                                Registre-se
+                                Cadastre-se
                             </Link>
                         </div>
                     </div>
