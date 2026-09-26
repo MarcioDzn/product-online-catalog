@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Avatar from "../Avatar";
 
 type Props = {
     children?: React.ReactNode;
@@ -29,21 +30,22 @@ export default function Navbar({ children }: Props) {
                     <div className="flex justify-between items-center">
                         {isAuthenticated && user ? (
                             <div className="relative">
-                                {/* Avatar */}
                                 <button
                                     type="button"
                                     onClick={() =>
                                         setIsUserMenuOpen((prev) => !prev)
                                     }
-                                    className="flex justify-center items-center rounded-lg bg-lime-400 w-9 h-9 cursor-pointer font-medium hover:bg-lime-500 transition-colors"
+                                    className="cursor-pointer rounded-lg"
                                 >
-                                    {user.name[0].toUpperCase()}
+                                    <div className="flex gap-2 items-center">
+                                        <Avatar name={user.name} />
+                                        <span>{user.name}</span>
+                                    </div>
+                                    
                                 </button>
 
-                                {/* Menu */}
                                 {isUserMenuOpen && (
                                     <>
-                                        {/* Área invisível para clicar fora */}
                                         <div
                                             className="fixed inset-0 z-40"
                                             onClick={() =>
@@ -53,7 +55,6 @@ export default function Navbar({ children }: Props) {
 
                                         <div className="absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
                                             
-                                            {/* Informações do usuário */}
                                             <div className="border-b border-gray-100 px-4 py-3">
                                                 <p className="font-medium text-gray-900">
                                                     {user.name}
@@ -64,7 +65,6 @@ export default function Navbar({ children }: Props) {
                                                 </p>
                                             </div>
 
-                                            {/* Opções */}
                                             <div className="p-2">
                                                 <Link
                                                     to="/admin"

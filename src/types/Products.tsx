@@ -18,6 +18,7 @@ export type Product = {
     stock: number;
     price: number;
     created_at: string
+    user_id: number
 }
 
 export type ProductResponse = {

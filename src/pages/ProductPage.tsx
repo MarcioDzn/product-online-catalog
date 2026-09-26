@@ -5,6 +5,8 @@ import { formatCurrency } from "../utils/money";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Divider from "../components/Divider";
+import { getUserById } from "../services/user";
+import Avatar from "../components/Avatar";
 
 const MAX_THUMBNAIL = 5;
 const MAX_THUMBNAIL_MOBILE = 3;
@@ -22,6 +24,16 @@ export default function ProductPage() {
     } = useQuery({
         queryKey: ["product", id],
         queryFn: () => getProductById(Number(id)),
+    });
+
+    const {
+        data: user,
+        isLoading: isLoadingUser,
+        isError: isErrorUser,
+    } = useQuery({
+        queryKey: ["user", product?.user_id],
+        queryFn: () => getUserById(product!.user_id),
+        enabled: !!product?.user_id,
     });
 
     useEffect(() => {
@@ -153,6 +165,12 @@ export default function ProductPage() {
                             </Link>
                         </span>
                     </div>
+
+                    <div className="flex items-center gap-2">
+                        <Avatar name={user?.name ?? ""} />
+                        <span>{user?.name}</span>
+                    </div>
+
                     <div className="flex flex-col gap-2">
                         <h1 className="text-2xl lg:text-3xl font-bold">{product.title}</h1>
                         <span className="text-xl lg:text-2xl font-bold text-gray-900">
