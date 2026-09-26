@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import FieldInput from "../components/FieldInput";
-import FieldRichTextEditor from "../components/richText/FieldRichTextEditor";
 import FieldImagePicker from "../components/imagePicker/FieldImagePicker";
 import FieldSelect from "../components/select/FieldSelect";
 import Button from "../components/Button";
@@ -15,6 +14,7 @@ import { PageActionContext } from "../context/PageActionContext";
 
 import toast from "react-hot-toast";
 import { categorySchema } from "../schemas/categorySchema";
+import TextAreaField from "../components/TextAreaField";
 
 const MAX_IMAGES = 25
 
@@ -298,12 +298,15 @@ export default function ProductFormPage() {
                                 error={fieldErrors.title}
                             />
 
-                            <FieldRichTextEditor
+                            <TextAreaField
                                 id="description"
-                                label="Descrição" 
+                                label="Descrição"
+                                placeholder="Descreva o produto..."
                                 value={description}
                                 onChange={setDescription}
+                                error={fieldErrors.description}
                             />
+
                         </div>
 
 

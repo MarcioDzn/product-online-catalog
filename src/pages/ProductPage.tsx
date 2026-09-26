@@ -166,10 +166,8 @@ export default function ProductPage() {
                                 <Divider />
 
                                 <div>
-                                    <div className="w-full prose prose-sm max-w-none">
-                                        <div
-                                            dangerouslySetInnerHTML={{ __html: product.description }}
-                                        />
+                                    <div className="whitespace-pre-wrap">
+                                        {product.description}
                                     </div>
                                 </div>
                             </>
