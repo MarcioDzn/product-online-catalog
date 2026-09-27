@@ -1,6 +1,13 @@
+type HoverColor =
+    | "hover:bg-gray-100"
+    | "hover:bg-blue-50 hover:text-blue-600"
+    | "hover:bg-red-50 hover:text-red-600";
+
+
 type Option = {
     icon: React.ReactNode
     name: string
+    hoverColor: HoverColor,
     onClick: () => void
 }
 
@@ -20,7 +27,8 @@ export function CardOptionsModal({ options }: Props) {
                         e.stopPropagation(); 
                         option.onClick();
                     }}
-                    className="flex w-full items-center justify-start gap-2 rounded px-2 py-1.5 text-smtransition-colors hover:bg-red-50 cursor-pointer"
+                    
+                    className={`flex w-full items-center justify-start gap-2 rounded px-2 py-1.5 text-smtransition-colors ${option.hoverColor} cursor-pointer`}
                 >
                     {option.icon}
                     <span>{option.name}</span>
