@@ -24,7 +24,7 @@ export default function Navbar({ children }: Props) {
                             to="/products/"
                         >
                             <span className="font-extrabold text-xl">
-                                CatalogWeb
+                                OnlineCatalog
                             </span>
                         </Link>
 
