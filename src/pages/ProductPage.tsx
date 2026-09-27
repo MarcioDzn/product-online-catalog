@@ -3,7 +3,6 @@ import { getProductById } from "../services/products";
 import { Link, useParams } from "react-router-dom";
 import { formatCurrency } from "../utils/money";
 import { useEffect, useState } from "react";
-import Button from "../components/button/Button";
 import Divider from "../components/common/Divider";
 import { getUserById } from "../services/user";
 import Avatar from "../components/common/Avatar";
@@ -137,7 +136,7 @@ export default function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="relative max-w-128 mx-auto min-[780px]:max-w-none w-full flex-1  aspect-3/4 rounded-lg overflow-hidden bg-gray-100 min-w-0 select-none">
+                    <div className="relative max-w-lg mx-auto min-[780px]:max-w-none w-full flex-1  aspect-3/4 rounded-lg overflow-hidden bg-gray-100 min-w-0 select-none">
                         <img
                             src={orderedImages[imageIndex]?.url}
                             alt="Imagem principal"

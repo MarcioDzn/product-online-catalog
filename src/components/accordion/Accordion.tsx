@@ -1,11 +1,3 @@
-import { useState } from "react"
-import AccordionSelectionItem from "./AccordionSelectionItem"
-
-type Item = {
-    id: number
-    text: string
-}
-
 type Props = {
     title: string
     children: React.ReactNode

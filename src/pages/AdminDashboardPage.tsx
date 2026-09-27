@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteProduct, getMyProducts } from "../services/products";
 import ProductCardAdminList from "../components/cards/ProductCardAdminList";
 import Button from "../components/button/Button";
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState} from "react";
 import { getMyCategories } from "../services/categories";
 import Accordion from "../components/accordion/Accordion";
 import FieldRangeSlider from "../components/slider/FieldRangeSlider";
@@ -95,7 +95,6 @@ export default function AdminDashboardPage() {
 
 
     const handleSortChange = (
-        e: ChangeEvent<HTMLSelectElement>,
         value: string
     ) => {
         const params = new URLSearchParams(searchParams);
@@ -107,11 +106,11 @@ export default function AdminDashboardPage() {
     };
     
 
-    const handlePriceFilter = (e: Event, newPrice: number[]) => {
+    const handlePriceFilter = (newPrice: number[]) => {
         setPriceFilter(newPrice);
     }
 
-    const handleStockFilter = (e: Event, newStock: number[]) => {
+    const handleStockFilter = (newStock: number[]) => {
         setStockFilter(newStock);
     }
 
@@ -136,8 +135,6 @@ export default function AdminDashboardPage() {
 
     const {
         data: categories = [],
-        isLoading: isLoadingCategory,
-        isError: isErrorCategory,
     } = useQuery({
         queryKey: ["categories"],
         queryFn: () => getMyCategories(),

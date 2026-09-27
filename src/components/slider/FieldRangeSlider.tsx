@@ -8,7 +8,7 @@ interface FieldRangeSliderProps {
   min: number
   max: number
   valuetext: (value: number) => string
-  onChange: (e: Event, range: number[]) => void
+  onChange: (range: number[]) => void
   onApply: () => void;
   valueFormatter?: (value: number) => string
   valueParser?: (value: string) => number
@@ -57,9 +57,9 @@ export default function FieldRangeSlider({
     }
   }, [Array.isArray(value) ? value[0] : null, Array.isArray(value) ? value[1] : null]);
 
-  const handleChange = (e: Event, newValue: number | number[]) => {
+  const handleChange = (_e: Event | React.SyntheticEvent, newValue: number | number[]) => {
     if (Array.isArray(newValue)) {
-      onChange(e, newValue);
+      onChange(newValue);
     }
   };
 
@@ -99,7 +99,7 @@ export default function FieldRangeSlider({
   const commitMin = () => {
     if (Array.isArray(value)) {
       const finalValue = valueParser ? minNumeric : parseValue(minText);
-      onChange(new Event("change"), [finalValue, value[1]]);
+      onChange([finalValue, value[1]]);
     }
     onApply();
   };
@@ -107,7 +107,7 @@ export default function FieldRangeSlider({
   const commitMax = () => {
     if (Array.isArray(value)) {
       const finalValue = valueParser ? maxNumeric : parseValue(maxText);
-      onChange(new Event("change"), [value[0], finalValue]);
+      onChange([value[0], finalValue]);
     }
     onApply();
   };
@@ -200,5 +200,5 @@ export default function FieldRangeSlider({
           </div>
         }
     </div>
-  )
+  );
 }

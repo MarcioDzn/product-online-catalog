@@ -1,4 +1,3 @@
-import type { ChangeEvent } from "react"
 import Select from "./Select"
 
 type Option = {
@@ -11,7 +10,7 @@ type Props = {
     label: string
     value: string,
     options: Option[],
-    onChange: (e: ChangeEvent<HTMLSelectElement>, value: string) => void
+    onChange: (value: string) => void
 }
 
 export default function FieldSelect({ 

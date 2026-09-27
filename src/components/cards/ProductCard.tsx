@@ -14,8 +14,7 @@ type Props = {
 export default function ProductCard({ 
     id,
     image, 
-    title, 
-    description, 
+    title,
     price,
     onProductClick
 }: Props) {

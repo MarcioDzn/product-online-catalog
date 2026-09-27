@@ -2,7 +2,7 @@ import ProductCardList from "../components/cards/ProductCardList";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../services/products";
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../types/Products";
 import Accordion from "../components/accordion/Accordion";
 import Divider from "../components/common/Divider";
@@ -69,7 +69,6 @@ export default function ProductListPage() {
     };
 
     const handleSortChange = (
-        e: ChangeEvent<HTMLSelectElement>,
         value: string
     ) => {
         const params = new URLSearchParams(searchParams);
@@ -80,7 +79,7 @@ export default function ProductListPage() {
         setSearchParams(params);
     };
 
-    const handlePriceFilter = (e: Event, newPrice: number[]) => {
+    const handlePriceFilter = (newPrice: number[]) => {
         setPriceFilter(newPrice);
     };
 
@@ -104,8 +103,6 @@ export default function ProductListPage() {
 
     const {
         data: categories = [],
-        isLoading: isLoadingCategory,
-        isError: isErrorCategory,
     } = useQuery({
         queryKey: ["categories"],
         queryFn: () => getCategories(),

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, type ChangeEvent } from "react";
+import { useContext, useEffect, useState } from "react";
 import FieldInput from "../components/input/FieldInput";
 import FieldImagePicker from "../components/imagePicker/FieldImagePicker";
 import FieldSelect from "../components/select/FieldSelect";
@@ -62,8 +62,6 @@ export default function ProductFormPage() {
 
     const {
         data: categories = [],
-        isLoading: isLoadingCategory,
-        isError: isErrorCategory,
     } = useQuery({
         queryKey: ["categories"],
         queryFn: () => getMyCategories(),
@@ -71,7 +69,6 @@ export default function ProductFormPage() {
 
     const {
         data: product,
-        isLoading: isLoadingProduct,
         isError: isErrorProduct,
     } = useQuery({
         queryKey: ["product", id],
@@ -326,7 +323,6 @@ export default function ProductFormPage() {
                                         },
                                     ]}
                                     onChange={(
-                                        e: ChangeEvent<HTMLSelectElement>, 
                                         status: string
                                     ) => setStatus(status)}
                             />
@@ -342,7 +338,6 @@ export default function ProductFormPage() {
                                         text: category.name
                                     }))}
                                     onChange={(
-                                        e: ChangeEvent<HTMLSelectElement>, 
                                         category: string
                                     ) => setCategory(category)}
                             />
