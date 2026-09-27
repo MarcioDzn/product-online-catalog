@@ -197,6 +197,7 @@ export default function ProductFormPage() {
             is_visible: data.status === "active",
             stock: data.stock,
             images: data.images.map((image) => ({
+                id: image.id || undefined,
                 url: image.url,
                 product_id: 0,
                 is_cover: image.is_cover,
