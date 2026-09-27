@@ -50,7 +50,6 @@ export default function ProductCardAdmin({
 
     return (
         <div className="group flex flex-col sm:flex-row w-full items-start sm:items-center justify-between gap-3.5 rounded-lg p-3 transition-all bg-white hover:shadow-sm">
-            {/* Bloco 1: Imagem e Textos Principais */}
             <div className="flex w-full sm:w-auto flex-1 items-center gap-3 min-w-0">
                 <div className="h-10 w-10 shrink-0 overflow-hidden rounded-md border border-gray-100 bg-gray-50">
                     {image ? (
@@ -77,31 +76,27 @@ export default function ProductCardAdmin({
                 </div>
             </div>
 
-            {/* Bloco 2: Valores, Controles e Ações */}
             <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-4 sm:gap-5 border-t border-gray-100 sm:border-0 pt-2.5 sm:pt-0">
                 
-                {/* Dados Principais */}
                 <div className="flex items-center gap-4 sm:gap-5">
-                    <div className="flex flex-col sm:items-end">
+                    <div className="flex flex-col w-24 sm:items-end">
                         <span className="text-[10px] font-semibold uppercase text-gray-500 tracking-wider">Preço</span>
                         <span className="text-xs font-bold text-gray-900">{formatCurrency(price)}</span>
                     </div>
 
-                    <div className="flex flex-col sm:items-end">
+                    <div className="flex flex-col w-20 sm:items-end">
                         <span className="text-[10px] font-semibold uppercase text-gray-500 tracking-wider">Estoque</span>
                         <span className="text-xs font-semibold text-gray-700">{stock} un</span>
                     </div>
 
-                    <div className="flex flex-col sm:items-end">
+                    <div className="flex flex-col w-28 sm:items-end">
                         <span className="text-[10px] font-semibold uppercase text-gray-500 tracking-wider">Criado</span>
                         <span className="text-xs text-gray-600">{formatRelativeDate(created_at)}</span>
                     </div>
                 </div>
 
-                {/* Divisor Visual */}
                 <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
 
-                {/* Controles: Menu */}
                 <div className="flex items-center gap-3 shrink-0">
                     <div ref={menuRef} className="relative">
                         <button
