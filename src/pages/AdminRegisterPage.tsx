@@ -204,7 +204,13 @@ export default function AdminRegisterPage() {
                             formId="register-form"
                             onClick={() => {}}
                         >
-                            Cadastrar-se
+                            {registerMutation.isPending ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                </span>
+                            ) : (
+                                <span>Cadastrar-se</span>
+                            )}    
                         </Button>
 
                     </div>

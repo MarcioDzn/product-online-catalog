@@ -42,6 +42,7 @@ export default function AdminAuthPage() {
             setAuthError(error.message);
             setPassword("")
         },
+
     });
 
 
@@ -128,7 +129,14 @@ export default function AdminAuthPage() {
                             formId="auth-form"
                             onClick={() => {}}
                         >
-                            Entrar
+                            {authMutation.isPending ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                </span>
+                            ) : (
+                                <span>Entrar</span>
+                            )}
+
                         </Button>
 
                         <div className="text-center text-sm text-gray-600 mt-2">
