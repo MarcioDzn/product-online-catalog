@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Avatar from "../Avatar";
+import Avatar from "../common/Avatar";
 
 type Props = {
     children?: React.ReactNode;
@@ -30,7 +30,7 @@ export default function Navbar({ children }: Props) {
 
                     </div>
 
-                    <div className="order-last md:order-none w-full md:flex-1">
+                    <div className="order-last md:order-0 w-full md:flex-1">
                         {children}
                     </div>
 

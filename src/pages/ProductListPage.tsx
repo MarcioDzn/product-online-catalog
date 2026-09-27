@@ -1,17 +1,17 @@
-import ProductCardList from "../components/ProductCardList";
+import ProductCardList from "../components/cards/ProductCardList";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../services/products";
 import { useEffect, useState, type ChangeEvent } from "react";
 import type { Product } from "../types/Products";
 import Accordion from "../components/accordion/Accordion";
-import Divider from "../components/Divider";
+import Divider from "../components/common/Divider";
 import FieldRangeSlider from "../components/slider/FieldRangeSlider";
 import AccordionSelectionItem from "../components/accordion/AccordionSelectionItem";
 import { getCategories } from "../services/categories";
 import { formatCurrency, maskCurrencyInput, parseCurrency } from "../utils/money";
 import Select from "../components/select/Select";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 
 function pricetext(price: number) {
   return `R$${price}`;

@@ -3,10 +3,10 @@ import { getProductById } from "../services/products";
 import { Link, useParams } from "react-router-dom";
 import { formatCurrency } from "../utils/money";
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
-import Divider from "../components/Divider";
+import Button from "../components/button/Button";
+import Divider from "../components/common/Divider";
 import { getUserById } from "../services/user";
-import Avatar from "../components/Avatar";
+import Avatar from "../components/common/Avatar";
 
 const MAX_THUMBNAIL = 5;
 const MAX_THUMBNAIL_MOBILE = 4;

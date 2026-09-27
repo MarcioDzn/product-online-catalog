@@ -7,7 +7,7 @@ import Navbar from './components/navbar/Navbar.tsx';
 import { StrictMode } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/QueryClient.ts';
-import AppLayout from './components/AppLayout.tsx';
+import AppLayout from './components/layout/AppLayout.tsx';
 import AdminDashboardPage from './pages/AdminDashboardPage.tsx';
 import SearchNavbar from './components/navbar/SearchNavbar.tsx';
 import ActionNavbar from './components/navbar/ActionNavbar.tsx';

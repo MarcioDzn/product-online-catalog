@@ -1,4 +1,4 @@
-import SelectButton from "../SelectButton"
+import SelectButton from "../button/SelectButton"
 
 type Props = {
     id: number

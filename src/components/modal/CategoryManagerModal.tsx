@@ -6,17 +6,17 @@ import {
 } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import Button from "./Button";
-import FieldInput from "./FieldInput";
+import Button from "../button/Button";
+import FieldInput from "../input/FieldInput";
 
 import {
     createCategory,
     deleteCategory,
     getMyCategories,
-} from "../services/categories";
+} from "../../services/categories";
 
-import { categorySchema } from "../schemas/categorySchema";
-import type { Category } from "../types/Products";
+import { categorySchema } from "../../schemas/categorySchema";
+import type { Category } from "../../types/Products";
 import ConfirmModal from "./ConfirmModal";
 
 type Props = {

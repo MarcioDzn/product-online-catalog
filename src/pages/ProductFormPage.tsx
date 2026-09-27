@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState, type ChangeEvent } from "react";
-import FieldInput from "../components/FieldInput";
+import FieldInput from "../components/input/FieldInput";
 import FieldImagePicker from "../components/imagePicker/FieldImagePicker";
 import FieldSelect from "../components/select/FieldSelect";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 import type { ProductFormData, ProductImage } from "../types/Products";
 import { getMyCategories } from "../services/categories";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -12,10 +12,10 @@ import type z from "zod";
 import { useNavigate, useParams } from "react-router-dom";
 import { PageActionContext } from "../context/PageActionContext";
 
-import CategoryManagerModal from "../components/CategoryManagerModal";
+import CategoryManagerModal from "../components/modal/CategoryManagerModal";
 
 import toast from "react-hot-toast";
-import TextAreaField from "../components/TextAreaField";
+import TextAreaField from "../components/input/TextAreaField";
 
 const MAX_IMAGES = 25
 
@@ -305,7 +305,7 @@ export default function ProductFormPage() {
                                 handleSelectCoverImage={handleSelectCoverImage}
                             />
                         </div>
-                        
+
                     </div>
                     
 

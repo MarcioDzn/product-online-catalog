@@ -1,6 +1,7 @@
-import type { Product } from "../types/Products";
-import Pagination from "./pagination/Pagination";
+import type { Product } from "../../types/Products";
 import ProductCard from "./ProductCard";
+import Pagination from "../pagination/Pagination";
+
 
 type Props = {
     products: Product[];

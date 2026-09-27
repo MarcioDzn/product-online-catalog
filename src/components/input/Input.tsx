@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { twMerge } from "tailwind-merge"
-import { formatCurrency } from "../utils/money"
-import { applyMask, getInputModeFor, type InputMaskMode } from "../utils/mask"
+import { formatCurrency } from "../../utils/money"
+import { applyMask, getInputModeFor, type InputMaskMode } from "../../utils/mask"
 
 type Props = {
     id?: string

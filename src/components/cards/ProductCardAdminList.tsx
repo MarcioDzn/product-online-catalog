@@ -1,10 +1,8 @@
 import { useState } from "react"
-import type { Category, Product } from "../types/Products"
-import Select from "./select/Select"
+import type { Product } from "../../types/Products"
 import ProductCardAdmin from "./ProductCardAdmin"
-import SelectButton from "./SelectButton"
-import Pagination from "./pagination/Pagination"
-import SearchInput from "./SearchInput"
+import Pagination from "../pagination/Pagination"
+import SearchInput from "../input/SearchInput"
 import { useNavigate } from "react-router-dom"
 
 type Props = {
@@ -47,33 +45,7 @@ export default function ProductCardAdminList({
         navigate(`/admin/products?${params.toString()}`);
     }
 
-    const [selectedProducts, setSelectedProducts] = useState<Set<number>>(
-        new Set()
-    );
-    
-    function toggleAllProducts() {
-        setSelectedProducts((current) => {
-            const allSelected = visiblePageProducts.every((product) =>
-                current.has(product.id)
-            );
-
-            if (allSelected) {
-                return new Set();
-            }
-
-            return new Set(visiblePageProducts.map((product) => product.id));
-        });
-    }
-
-
-    const visiblePageProducts = products.slice(0, maxProductsPerPage);
-
-    const allSelected =
-        visiblePageProducts.length > 0 &&
-        visiblePageProducts.every((product) => selectedProducts.has(product.id));
-
-    const someSelected =
-        visiblePageProducts.some((product) => selectedProducts.has(product.id));
+    const visiblePageProducts = products.slice(0, maxProductsPerPage)
 
     return (
         <div className="w-full">

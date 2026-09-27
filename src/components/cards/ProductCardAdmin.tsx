@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import type { ProductImage } from "../types/Products";
-import { formatCurrency } from "../utils/money";
+import type { ProductImage } from "../../types/Products";
+import { formatCurrency } from "../../utils/money";
 import { CardOptionsModal } from "./CardOptionsModal";
-import { formatRelativeDate } from "../utils/time";
+import { formatRelativeDate } from "../../utils/time";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

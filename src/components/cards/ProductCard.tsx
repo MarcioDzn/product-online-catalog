@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import type { ProductImage } from "../types/Products";
-import { formatCurrency } from "../utils/money";
+import { formatCurrency } from "../../utils/money";
+import type { ProductImage } from "../../types/Products";
+
 
 type Props = {
     id: number

@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import Button from "../Button";
+import Button from "../button/Button";
 import { useContext } from "react";
 import { PageActionContext } from "../../context/PageActionContext";
 

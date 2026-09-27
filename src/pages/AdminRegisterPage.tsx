@@ -1,11 +1,11 @@
 import { useState } from "react";
-import FieldInput from "../components/FieldInput";
+import FieldInput from "../components/input/FieldInput";
 import type { ZodError } from "zod";
 import { authSchema } from "../schemas/authSchema";
 import type { AuthData } from "../types/Auth";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "../services/auth";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { registerSchema } from "../schemas/registerSchema";

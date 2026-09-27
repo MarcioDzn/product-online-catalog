@@ -1,6 +1,6 @@
 import Slider from "@mui/material/Slider";
 import { useId, useState, useEffect } from "react";
-import Input from "../Input";
+import Input from "../input/Input";
 
 interface FieldRangeSliderProps { 
   title?: string

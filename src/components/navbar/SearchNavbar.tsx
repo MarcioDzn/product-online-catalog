@@ -1,5 +1,5 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import SearchInput from "../SearchInput";
+import { useNavigate } from "react-router-dom";
+import SearchInput from "../input/SearchInput";
 import { useState } from "react";
 import Navbar from "./Navbar";
 
