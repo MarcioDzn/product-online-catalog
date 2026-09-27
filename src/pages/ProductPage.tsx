@@ -53,8 +53,13 @@ export default function ProductPage() {
         ? MAX_THUMBNAIL_MOBILE
         : MAX_THUMBNAIL;
 
-    const totalImages = product?.images.length ?? 0;
+    const orderedImages = [
+        ...(product?.images?.filter((img) => img.is_cover) ?? []), 
+        ...(product?.images?.filter((img) => !img.is_cover) ?? []),
+    ];
 
+    const totalImages = orderedImages.length;
+    
     // recalcula o início das miniaturas sempre que mudar entre mobile/desktop ou total de imagens
     useEffect(() => {
         if (!product) return;
@@ -75,6 +80,8 @@ export default function ProductPage() {
     if (isLoading) return <span>Carregando...</span>;
     if (isError || !product) return <span>Produto não encontrado</span>;
 
+
+
     const changeImage = (newIndex: number) => {
         setImageIndex(newIndex);
         
@@ -91,6 +98,7 @@ export default function ProductPage() {
         
         setThumbnailStart(newStart);
     };
+    
 
     return (
         <main className="py-8 px-4 max-w-7xl mx-auto">
@@ -99,10 +107,10 @@ export default function ProductPage() {
                     <div className="flex flex-row md:flex-col items-center justify-center my-auto gap-2 shrink-0 w-full md:w-auto">
 
                         <div className="flex flex-row md:flex-col gap-2 overflow-hidden">
-                            {product.images
+                            {orderedImages
                                 .slice(thumbnailStart, thumbnailStart + maxThumbnail)
                                 .map((img) => {
-                                    const index = product.images.findIndex(
+                                    const index = orderedImages.findIndex(
                                         (image) => image.id === img.id
                                     );
 
@@ -131,7 +139,7 @@ export default function ProductPage() {
 
                     <div className="relative max-w-128 mx-auto min-[780px]:max-w-none w-full flex-1  aspect-3/4 rounded-lg overflow-hidden bg-gray-100 min-w-0 select-none">
                         <img
-                            src={product.images[imageIndex]?.url}
+                            src={orderedImages[imageIndex]?.url}
                             alt="Imagem principal"
                             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                         />
