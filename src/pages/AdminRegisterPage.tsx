@@ -204,7 +204,7 @@ export default function AdminRegisterPage() {
                             formId="register-form"
                             onClick={() => {}}
                         >
-                            Cadastrar-se-se
+                            Cadastrar-se
                         </Button>
 
                     </div>
