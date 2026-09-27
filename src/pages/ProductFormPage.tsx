@@ -293,6 +293,19 @@ export default function ProductFormPage() {
                             </div>
                         </div>
 
+                        <div className="border border-gray-200 rounded-lg p-4">
+                            <FieldImagePicker
+                                id="images"
+                                label="Imagens"
+                                images={images}
+                                isDisabled={images.length === MAX_IMAGES}
+                                error={fieldErrors.images}
+                                handleRemoveImage={handleRemoveImage}
+                                handleAddImages={handleSetImages}
+                                handleSelectCoverImage={handleSelectCoverImage}
+                            />
+                        </div>
+                        
                     </div>
                     
 
@@ -344,19 +357,6 @@ export default function ProductFormPage() {
                                 Gerenciar categorias
                             </Button>
 
-                        </div>
-
-                        <div className="border border-gray-200 rounded-lg p-4">
-                            <FieldImagePicker
-                                id="images"
-                                label="Imagens"
-                                images={images}
-                                isDisabled={images.length === MAX_IMAGES}
-                                error={fieldErrors.images}
-                                handleRemoveImage={handleRemoveImage}
-                                handleAddImages={handleSetImages}
-                                handleSelectCoverImage={handleSelectCoverImage}
-                            />
                         </div>
                     </div>
                 </main>

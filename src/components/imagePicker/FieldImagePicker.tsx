@@ -36,20 +36,10 @@ export default function FieldImagePicker({
             </span>
 
             <div className="flex flex-col gap-4 h-full">
-                {images.length > 0 && (
-                    <div className="relative w-full aspect-3/4 rounded-lg overflow-hidden bg-gray-100">
-                        <img
-                            src={images.find((img) => img.is_cover)?.url}
-                            alt={`Imagem principal`}
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                    </div>
-                )}
-
                 <div className="
                     flex-1
                     grid
-                    grid-cols-3
+                    grid-cols-5
                     gap-3
                 ">
                     {images.map((img, index) => (
@@ -59,6 +49,12 @@ export default function FieldImagePicker({
                             onClick={() => handleSelectCoverImage(index)}
                             key={`${img.id}-${index}`}
                         >
+                            {img.is_cover && (
+                                <span className="absolute top-1.5 left-1.5 z-20 bg-gray-50 text-black text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded shadow-sm pointer-events-none">
+                                    Capa
+                                </span>
+                            )}
+
                             <div 
                                 className="relative w-full h-full bg-gray-500 z-11 opacity-0 group-hover:opacity-20 transition-opacity"
                             />
