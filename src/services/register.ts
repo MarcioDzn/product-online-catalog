@@ -1,13 +1,16 @@
 import type { RegisterData } from "../types/Register";
 
 export async function register(data: RegisterData) {
-    const response = await fetch("http://localhost:8000/users/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }
+    );
 
     const responseData = await response.json();
 

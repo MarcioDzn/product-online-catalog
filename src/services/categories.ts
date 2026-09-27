@@ -16,23 +16,23 @@ function getAuthHeaders(): HeadersInit {
 export async function getCategories(
     search: string = "",
 ): Promise<Category[]> {
-    const url = 
-        "http://localhost:8000/categories?name=" + search;
+    const url =
+        `${import.meta.env.VITE_API_URL}/categories?name=${search}`;
 
-    const response = await fetch(url)
+    const response = await fetch(url);
 
     if (!response.ok) {
-        throw new Error("Erro ao buscar categorias")
+        throw new Error("Erro ao buscar categorias");
     }
 
-    return response.json()
+    return response.json();
 }
 
 export async function getMyCategories(
     search: string = "",
 ): Promise<Category[]> {
-    const url = 
-        "http://localhost:8000/categories/me?name=" + search;
+    const url =
+        `${import.meta.env.VITE_API_URL}/categories/me?name=${search}`;
 
     const response = await fetch(url, {
         headers: {
@@ -50,14 +50,17 @@ export async function getMyCategories(
 export async function createCategory(
     data: CategoryFormData
 ): Promise<Category> {
-    const response = await fetch("http://localhost:8000/categories/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            ...getAuthHeaders(),
-        },
-        body: JSON.stringify(data),
-    });
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/categories/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                ...getAuthHeaders(),
+            },
+            body: JSON.stringify(data),
+        }
+    );
 
     if (!response.ok) {
         const error = await response.json();
@@ -72,7 +75,7 @@ export async function createCategory(
 
 export async function deleteCategory(id: number): Promise<void> {
     const response = await fetch(
-        `http://localhost:8000/categories/${id}`,
+        `${import.meta.env.VITE_API_URL}/categories/${id}`,
         {
             method: "DELETE",
             headers: {

@@ -22,7 +22,7 @@ export async function getProducts(
     pageSize: number
 ): Promise<ProductResponse> {
     const url =
-        "http://localhost:8000/products?title=" + search +
+        `${import.meta.env.VITE_API_URL}/products?title=` + search +
         "&page=" + page +
         "&page_size=" + pageSize +
         categoryIds
@@ -53,7 +53,7 @@ export async function getMyProducts(
     pageSize: number
 ): Promise<ProductResponse> {
     const url =
-        "http://localhost:8000/products/me?title=" + search +
+        `${import.meta.env.VITE_API_URL}/products/me?title=` + search +
         "&page=" + page +
         "&page_size=" + pageSize +
         categoryIds
@@ -79,7 +79,7 @@ export async function getMyProducts(
 export async function getProductById(
     id: number
 ): Promise<Product> {
-    const url = "http://localhost:8000/products/" + id;
+    const url = `${import.meta.env.VITE_API_URL}/products/` + id;
 
     const response = await fetch(url);
 
@@ -93,14 +93,17 @@ export async function getProductById(
 export async function createProduct(
     data: ProductFormData
 ): Promise<Product> {
-    const response = await fetch("http://localhost:8000/products/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            ...getAuthHeaders(),
-        },
-        body: JSON.stringify(data),
-    });
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/products/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                ...getAuthHeaders(),
+            },
+            body: JSON.stringify(data),
+        }
+    );
 
     if (!response.ok) {
         const error = await response.text();
@@ -120,7 +123,7 @@ export async function updateProduct(
     data: ProductFormData
 ): Promise<Product> {
     const response = await fetch(
-        "http://localhost:8000/products/" + id,
+        `${import.meta.env.VITE_API_URL}/products/` + id,
         {
             method: "PATCH",
             headers: {
@@ -148,7 +151,7 @@ export async function deleteProduct(
     id: number,
 ): Promise<Product> {
     const response = await fetch(
-        "http://localhost:8000/products/" + id,
+        `${import.meta.env.VITE_API_URL}/products/` + id,
         {
             method: "DELETE",
             headers: {
