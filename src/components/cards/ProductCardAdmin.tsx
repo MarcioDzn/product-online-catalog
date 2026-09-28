@@ -113,7 +113,7 @@ export default function ProductCardAdmin({
                         </button>
 
                         {optionOpened && (
-                            <div className="absolute right-0 top-0 z-50 min-w-60">
+                            <div className="absolute -right-8 top-0 z-50 min-w-60">
                                 <CardOptionsModal
                                     options={[
                                         {
