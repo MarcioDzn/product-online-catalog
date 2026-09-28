@@ -40,12 +40,10 @@ export function filterCurrency(inputValue: string): string {
 export function filterPhone(inputValue: string): string {
     let digits = inputValue.replace(/\D/g, "");
 
-    // Remove o código do Brasil caso o usuário cole +55...
     if (digits.startsWith("55")) {
         digits = digits.slice(2);
     }
 
-    // DDD + número = 11 dígitos
     digits = digits.slice(0, 11);
 
     if (!digits) {
