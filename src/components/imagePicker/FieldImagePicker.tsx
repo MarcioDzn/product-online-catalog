@@ -39,7 +39,9 @@ export default function FieldImagePicker({
                 <div className="
                     flex-1
                     grid
-                    grid-cols-5
+                    grid-cols-3
+                    sm:grid-cols-3
+                    lg:grid-cols-5
                     gap-3
                 ">
                     {images.map((img, index) => (
@@ -60,7 +62,17 @@ export default function FieldImagePicker({
                             />
                             <button
                                 type="button"
-                                className="flex justify-center items-center opacity-0 group-hover:opacity-100 absolute right-1 top-1 z-20 cursor-pointer rounded-lg w-6 h-6 bg-white shadow-sm transition-opacity"
+                                className="
+                                    flex justify-center items-center
+                                    opacity-100
+                                    lg:opacity-0
+                                    lg:group-hover:opacity-100
+                                    absolute right-1 top-1 z-20
+                                    cursor-pointer rounded-lg
+                                    w-7 h-7
+                                    bg-white shadow-sm
+                                    transition-opacity
+                                "
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     handleRemoveImage(index);
