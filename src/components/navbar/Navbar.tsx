@@ -46,7 +46,7 @@ export default function Navbar({ children }: Props) {
                                 >
                                     <div className="flex gap-2 items-center">
                                         <Avatar name={user.name} />
-                                        <span>{user.name}</span>
+                                        <span>{user.name.split(" ")[0]}</span>
                                     </div>
                                     
                                 </button>
