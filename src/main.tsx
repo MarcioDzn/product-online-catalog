@@ -1,6 +1,6 @@
 
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './index.css'
 import ProductListPage from './pages/ProductListPage.tsx';
 import Navbar from './components/navbar/Navbar.tsx';
@@ -28,6 +28,8 @@ createRoot(document.getElementById('root')!).render(
             <Toaster position="bottom-right" />
 
             <Routes>
+              <Route path="/" element={<Navigate to="/products" replace />} />
+
               <Route element={<SearchNavbar />}>
                 <Route element={<AppLayout />}>
                   <Route

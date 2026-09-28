@@ -18,9 +18,9 @@ function pricetext(price: number) {
 }
 
 const MIN_PRICE = 0;
-const MAX_PRICE = 500;
+const MAX_PRICE = 10000;
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 20;
 
 export default function ProductListPage() {
     const [searchParams, setSearchParams] = useSearchParams();
